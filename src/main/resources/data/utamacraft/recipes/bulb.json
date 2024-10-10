@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#T#",
+    " C "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glass"
+    },
+    "T": {
+      "item": "utamacraft:tungsten_ingot"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "item": "utamacraft:bulb",
+    "count": 1
+  }
+}

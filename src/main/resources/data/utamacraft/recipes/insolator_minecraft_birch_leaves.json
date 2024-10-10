@@ -1,0 +1,15 @@
+{
+  "type": "utamacraft:insolator",
+  "input": {
+    "item": "minecraft:birch_leaves"
+  },
+  "ticks": 1000,
+  "fluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 1000
+  },
+  "output": {
+    "item": "minecraft:birch_leaves",
+    "count": 2
+  }
+}

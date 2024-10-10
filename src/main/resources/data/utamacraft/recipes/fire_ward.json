@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "T T",
+    "FoF"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "T": {
+      "item": "utamacraft:tungsten_ingot"
+    },
+    "F": {
+      "item": "minecraft:fire_charge"
+    },
+    "o": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "utamacraft:fire_ward",
+    "count": 1
+  }
+}

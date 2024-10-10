@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "render_type": "translucent",
+  "textures": {
+    "all": "utamacraft:block/ethereal_glass_tinted"
+  }
+}

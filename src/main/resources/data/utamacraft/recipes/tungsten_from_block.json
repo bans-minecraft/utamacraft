@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "utamacraft:tungsten_block"
+    }
+  ],
+  "result": {
+    "item": "utamacraft:tungsten_ingot",
+    "count": 9
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["iii", "tet", "tpt"],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "e": {
+      "item": "minecraft:ender_eye"
+    },
+    "t": {
+      "item": "utamacraft:tungsten_ingot"
+    },
+    "p": {
+      "item": "utamacraft:pcb"
+    }
+  },
+  "result": {
+    "item": "utamacraft:awareness_block",
+    "count": 1
+  }
+}

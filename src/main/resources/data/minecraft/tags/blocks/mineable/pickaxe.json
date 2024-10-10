@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "utamacraft:tungsten_ore",
+    "utamacraft:deepslate_tungsten_ore",
+    "utamacraft:tungsten_block"
+  ]
+}

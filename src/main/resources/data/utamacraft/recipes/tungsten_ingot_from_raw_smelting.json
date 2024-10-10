@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 400,
+  "experience": 1.0,
+  "group": "tungsten",
+  "ingredient": {
+    "item": "utamacraft:tungsten_raw"
+  },
+  "result": "utamacraft:tungsten_ingot"
+}

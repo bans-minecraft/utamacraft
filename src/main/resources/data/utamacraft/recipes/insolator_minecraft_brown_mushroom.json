@@ -1,0 +1,15 @@
+{
+  "type": "utamacraft:insolator",
+  "input": {
+    "item": "minecraft:brown_mushroom"
+  },
+  "ticks": 500,
+  "fluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 500
+  },
+  "output": {
+    "item": "minecraft:brown_mushroom",
+    "count": 2
+  }
+}

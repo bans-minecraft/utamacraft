@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["GPG", "T.T", "GGG"],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "utamacraft:pcb"
+    },
+    "T": {
+      "item": "utamacraft:tungsten_ingot"
+    },
+    ".": {
+      "item": "mekanism:teleportation_core"
+    }
+  },
+  "result": {
+    "item": "utamacraft:teleporter_peripheral",
+    "count": 1
+  }
+}

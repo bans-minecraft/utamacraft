@@ -1,0 +1,15 @@
+{
+  "type": "utamacraft:insolator",
+  "input": {
+    "item": "minecraft:big_dripleaf"
+  },
+  "ticks": 500,
+  "fluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 500
+  },
+  "output": {
+    "item": "minecraft:big_dripleaf",
+    "count": 2
+  }
+}

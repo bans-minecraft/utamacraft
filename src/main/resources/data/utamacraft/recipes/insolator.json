@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TCT",
+    "TB ",
+    "sPs"
+  ],
+  "key": {
+    "T": {
+      "item": "utamacraft:tungsten_ingot"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "B": {
+      "item": "utamacraft:bulb"
+    },
+    "P": {
+      "item": "utamacraft:pcb"
+    },
+    "s": {
+      "item": "minecraft:stone_slab"
+    }
+  },
+  "result": {
+    "item": "utamacraft:insolator",
+    "count": 1
+  }
+}

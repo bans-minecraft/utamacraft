@@ -1,0 +1,15 @@
+{
+  "type": "utamacraft:insolator",
+  "input": {
+    "item": "minecraft:large_fern"
+  },
+  "ticks": 500,
+  "fluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 500
+  },
+  "output": {
+    "item": "minecraft:large_fern",
+    "count": 2
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "utamacraft:insolator",
+  "input": {
+    "item": "minecraft:dark_oak_sapling"
+  },
+  "ticks": 1000,
+  "fluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 1000
+  },
+  "output": {
+    "item": "minecraft:dark_oak_sapling",
+    "count": 2
+  }
+}

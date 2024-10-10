@@ -1,0 +1,27 @@
+{
+  "homepage": "https://git.blakerain.com/bans-minecraft/utamacraft",
+  "1.20.1": {
+    "0.3.0-1.20.1": "Migrate to Minecraft 1.20.1"
+  },
+  "1.19.2": {
+    "0.2.9-1.19": "Added the teleportation peripheral",
+    "0.2.8-1.19": "Fixes for various peripherals",
+    "0.2.7-1.19": "Add the Digitizer block peripheral",
+    "0.2.6-1.19": "Fix the excessive cost of the awareness block",
+    "0.2.5-1.19": "Add the awareness block peripheral",
+    "0.2.4-1.19": "Add some fixes and new textures",
+    "0.2.3-1.19": "Add CC peripheral for Insolator",
+    "0.2.2-1.19": "Fix bugs with Insolator",
+    "0.2.1-1.19": "Fixed mixin bug",
+    "0.2.0-1.19": "Added insolator and fire pendant",
+    "0.1.1-1.19": "Fix player peripheral and add missing recipe",
+    "0.1.0-1.19": "Added tinted ethereal glass",
+    "0.0.1-1.19": "Initial release"
+  },
+  "promos": {
+    "1.20.1-latest": "0.3.0-1.20.1",
+    "1.20.1-recommended": "0.3.0-1.20.1"
+    "1.19.2-latest": "0.2.9-1.19",
+    "1.19.2-recommended": "0.2.9-1.19"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" p ", "TRT", "TPT"],
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "T": {
+      "item": "utamacraft:tungsten_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "P": {
+      "item": "utamacraft:pcb"
+    }
+  },
+  "result": {
+    "item": "utamacraft:digitizer",
+    "count": 1
+  }
+}

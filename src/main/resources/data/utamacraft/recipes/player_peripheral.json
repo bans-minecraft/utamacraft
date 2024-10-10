@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GRG",
+    "R.R",
+    "GRG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    ".": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "utamacraft:player_peripheral",
+    "count": 1
+  }
+}

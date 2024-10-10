@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "utamacraft:block/digitizer"
+    },
+    "facing=east": {
+      "model": "utamacraft:block/digitizer",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "utamacraft:block/digitizer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "utamacraft:block/digitizer",
+      "y": 270
+    }
+  }
+}

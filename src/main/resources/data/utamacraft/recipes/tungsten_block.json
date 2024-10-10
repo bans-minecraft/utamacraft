@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TTT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "utamacraft:tungsten_ingot"
+    }
+  },
+  "result": {
+    "item": "utamacraft:tungsten_block"
+  }
+}

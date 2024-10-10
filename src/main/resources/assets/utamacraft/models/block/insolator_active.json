@@ -1,0 +1,6 @@
+{
+  "parent": "utamacraft:block/insolator",
+  "textures": {
+    "5": "utamacraft:block/insolator_active"
+  }
+}

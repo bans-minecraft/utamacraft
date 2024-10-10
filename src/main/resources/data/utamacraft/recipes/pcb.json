@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FF",
+    "CG"
+  ],
+  "key": {
+    "F": {
+      "item": "utamacraft:fiber_glass"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "utamacraft:pcb",
+    "count": 1
+  }
+}
