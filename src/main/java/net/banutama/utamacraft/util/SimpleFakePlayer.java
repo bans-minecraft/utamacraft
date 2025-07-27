@@ -1,7 +1,8 @@
 package net.banutama.utamacraft.util;
 
 import com.mojang.authlib.GameProfile;
-import net.banutama.utamacraft.Utamacraft;
+import com.mojang.logging.LogUtils;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -11,14 +12,17 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.common.util.FakePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -29,6 +33,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class SimpleFakePlayer extends FakePlayer {
+    private static final Logger LOGGER = LogUtils.getLogger();
     private static WeakReference<SimpleFakePlayer> INSTANCE;
 
     public SimpleFakePlayer(ServerLevel world, GameProfile profile) {
@@ -53,40 +58,42 @@ public class SimpleFakePlayer extends FakePlayer {
         Vec3 origin = new Vec3(getX(), getY(), getZ());
         Vec3 look = getLookAngle();
         Vec3 target = new Vec3(origin.x + look.x * range, origin.y + look.y * range, origin.z + look.z * range);
-        ClipContext traceContext = new ClipContext(origin, target, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, this);
+        ClipContext traceContext = new ClipContext(origin, target, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE,
+                this);
         Vec3 directionVec = traceContext.getFrom().subtract(traceContext.getTo());
         Direction traceDirection = Direction.getNearest(directionVec.x, directionVec.y, directionVec.z);
 
         HitResult blockHit = null;
         if (skipBlock) {
             Vec3 to = traceContext.getTo();
-            Vec3i toi = new Vec3i((int)to.x, (int)to.y, (int)to.z);
+            Vec3i toi = new Vec3i((int) to.x, (int) to.y, (int) to.z);
             blockHit = BlockHitResult.miss(to, traceDirection, new BlockPos(toi));
         } else {
-            blockHit = BlockGetter.traverseBlocks(traceContext.getFrom(), traceContext.getTo(), traceContext, (clipContext, pos) -> {
-                if (level().isEmptyBlock(pos)) {
-                    return null;
-                }
+            blockHit = BlockGetter.traverseBlocks(traceContext.getFrom(), traceContext.getTo(), traceContext,
+                    (clipContext, pos) -> {
+                        if (level().isEmptyBlock(pos)) {
+                            return null;
+                        }
 
-                return new BlockHitResult(new Vec3(pos.getX(), pos.getY(), pos.getZ()), traceDirection, pos, false);
-            }, clipContext -> {
-                Vec3 to = clipContext.getTo();
-                Vec3i toi = new Vec3i((int)to.x, (int)to.y, (int)to.z);
-                return BlockHitResult.miss(clipContext.getTo(), traceDirection, new BlockPos(toi));
-            });
+                        return new BlockHitResult(new Vec3(pos.getX(), pos.getY(), pos.getZ()), traceDirection, pos,
+                                false);
+                    }, clipContext -> {
+                        Vec3 to = clipContext.getTo();
+                        Vec3i toi = new Vec3i((int) to.x, (int) to.y, (int) to.z);
+                        return BlockHitResult.miss(clipContext.getTo(), traceDirection, new BlockPos(toi));
+                    });
         }
 
         if (skipEntity) {
             return blockHit;
         }
 
-        List<Entity> entities =
-                level().getEntities(
-                        this,
-                        this.getBoundingBox()
-                                .expandTowards(look.x * range, look.y * range, look.z * range)
-                                .inflate(1.0, 1.0, 1.0),
-                        EntitySelector.NO_SPECTATORS);
+        List<Entity> entities = level().getEntities(
+                this,
+                this.getBoundingBox()
+                        .expandTowards(look.x * range, look.y * range, look.z * range)
+                        .inflate(1.0, 1.0, 1.0),
+                EntitySelector.NO_SPECTATORS);
 
         LivingEntity closestEntity = null;
         Vec3 closestVec = null;
@@ -142,8 +149,8 @@ public class SimpleFakePlayer extends FakePlayer {
     public InteractionResult use(int range, boolean skipEntity, boolean skipBlock, Predicate<Entity> entityFilter) {
         HitResult hit = findHit(range, skipEntity, skipBlock, entityFilter);
         if (hit instanceof BlockHitResult blockHit) {
-            InteractionResult res =
-                    gameMode.useItemOn(this, level(), getMainHandItem(), InteractionHand.MAIN_HAND, blockHit);
+            InteractionResult res = gameMode.useItemOn(this, level(), getMainHandItem(), InteractionHand.MAIN_HAND,
+                    blockHit);
             if (res.consumesAction()) {
                 return res;
             }
@@ -155,6 +162,65 @@ public class SimpleFakePlayer extends FakePlayer {
         } else {
             return InteractionResult.FAIL;
         }
+    }
+
+    public MerchantOffers getTrades(int range) {
+        HitResult hit = findHit(range, false, true, entity -> entity instanceof Villager);
+        if (hit instanceof EntityHitResult entityHit) {
+            if (entityHit.getEntity() instanceof Villager villager) {
+                return villager.getOffers();
+            } else {
+                LOGGER.info("Entity hit is not a Villager: {}", entityHit.getEntity().getType());
+            }
+        } else {
+            LOGGER.info("Hit result is not an EntityHitResult: {}", hit.getType());
+        }
+
+        return null;
+    }
+
+    public Entity getTargetedEntity(int range) {
+        HitResult hit = findHit(range, false, true, entity -> entity instanceof LivingEntity);
+        if (hit instanceof EntityHitResult entityHit) {
+            return entityHit.getEntity();
+        } else {
+            LOGGER.info("Hit result is not an EntityHitResult: {}", hit.getType());
+            return null;
+        }
+    }
+
+    public ItemStack makeTrade(int range, int tradeIndex, ItemStack offerA, ItemStack offerB) {
+        HitResult hit = findHit(range, false, true, entity -> entity instanceof Villager);
+        if (!(hit instanceof EntityHitResult entityHit)) {
+            LOGGER.info("Hit result is not an EntityHitResult: {}", hit.getType());
+            return null;
+        }
+
+        if (!(entityHit.getEntity() instanceof Villager villager)) {
+            LOGGER.info("Entity hit is not a Villager: {}", entityHit.getEntity().getType());
+            return null;
+        }
+
+        var offers = villager.getOffers();
+        if (offers == null || offers.isEmpty()) {
+            LOGGER.info("No offers available for the Villager");
+            return null;
+        }
+
+        if (tradeIndex < 0 || tradeIndex >= offers.size()) {
+            LOGGER.info("Trade index {} is out of bounds for the Villager's offers", tradeIndex);
+            return null;
+        }
+
+        var offer = offers.get(tradeIndex);
+        if (!offer.take(offerA, offerB)) {
+            LOGGER.info("Offer {} does not match the provided items: {} and {}", tradeIndex, offerA, offerB);
+            return null;
+        }
+
+        var result = offer.assemble();
+        villager.notifyTrade(offer);
+        return result;
     }
 
     //

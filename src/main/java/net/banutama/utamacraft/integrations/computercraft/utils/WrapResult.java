@@ -4,6 +4,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -121,6 +123,37 @@ public class WrapResult {
         }
 
         return wrapped;
+    }
+
+    public static Map<String, Object> wrap(MerchantOffer offer) {
+        var wrapped = new HashMap<String, Object>();
+
+        wrapped.put("costs", new Object[] {
+                WrapResult.wrap(offer.getCostA()),
+                WrapResult.wrap(offer.getCostB())
+        });
+
+        wrapped.put("result", WrapResult.wrap(offer.getResult()));
+        wrapped.put("uses", offer.getUses());
+        wrapped.put("maxUses", offer.getMaxUses());
+        wrapped.put("demand", offer.getDemand());
+        wrapped.put("specialPriceDiff", offer.getSpecialPriceDiff());
+        wrapped.put("multiplier", offer.getPriceMultiplier());
+        wrapped.put("isOutOfStock", offer.isOutOfStock());
+        wrapped.put("needsRestock", offer.needsRestock());
+        wrapped.put("xp", offer.getXp());
+
+        return wrapped;
+    }
+
+    public static List<Object> wrap(MerchantOffers offers) {
+        List<Object> wrappedOffers = new ArrayList<>(offers.size());
+
+        for (MerchantOffer offer : offers) {
+            wrappedOffers.add(wrap(offer));
+        }
+
+        return wrappedOffers;
     }
 
     public static ResourceLocation getName(Item item) {
